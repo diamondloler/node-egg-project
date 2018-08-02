@@ -37,7 +37,7 @@ class HomeController extends Controller {
   async updateUserInfo() {
     var ctx = this.ctx
     var data = ctx.request.body
-    var id = data.id
+    var id = data.id || 0
     var msg = ''
 
     delete data.id

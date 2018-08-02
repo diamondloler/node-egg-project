@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="../public/js/lib/jquery.min.js"></script>
-    <script src="../public/js/lib/faker/dist/faker.min.js"></script>
+    <script src="../public/js/lib/faker/dist/faker.js"></script>
 </head>
 
 <body>
@@ -22,14 +22,21 @@
         {% endblock %}
     </div>
     <script>
+        console.log(faker)
+        var commerce = faker.commerce
+        var phone = faker.phone
+        var internet = faker.internet
+        var random = faker.random
+        console.log(Object.keys(name))
         $.get('/GetUserInfo?id=1', function (res) {
             console.log(res)
         })
         $('#alert').click((e) => {
             $.post('/UpdateUserInfo', {
-                email: '95247528@qq.com',
-                user_name: '菜花心',
-                phone: 15445829524
+                user_name: commerce.productName(),
+                phone: phone.phoneNumberFormat(),
+                email: internet.email(),
+                password: random.number()
             }, function (res) {
                 console.log(res)
             })
