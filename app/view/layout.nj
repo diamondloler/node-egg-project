@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../public/js/lib/jquery.min.js"></script>
+    <script src="../public/js/lib/faker/dist/faker.min.js"></script>
+</head>
+
+<body>
+    <div>
+        {% block first %} 
+            this is the default template 1
+        {% endblock %}
+    </div>
+    <div>
+        {% block second %} 
+            this is the default template 2
+        {% endblock %}
+    </div>
+    <script>
+        $.get('/GetUserInfo?id=1', function (res) {
+            console.log(res)
+        })
+        $('#alert').click((e) => {
+            $.post('/UpdateUserInfo', {
+                email: '95247528@qq.com',
+                user_name: '菜花心',
+                phone: 15445829524
+            }, function (res) {
+                console.log(res)
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{% extends "../layout.nj" %}
+
+{% block first %}
+     {{super()}}
+    <p>hi, my name is {{name | upper}}</p>
+     {% set name = "9527" %}
+    <p>hi, my name is {{name}}</p>
+{% endblock %}
+
+
+{% block second %}
+    <p>Nice to see you~</p>
+
+    {% if renderIf.isTrue %}
+        <p>it's true</p>
+    {% else %}
+        <p>it's false</p>
+    {% endif %}
+
+    {% for item in renderFor %}
+        <p>{{item}}</p>
+        {% else %}
+        <p>还没有成员呢</p>
+    {% endfor %}
+
+    {% macro field(name, type="text") %}
+        <div style="margin-top: 100px;">
+            <input name="{{name}}" type="{{type}}" />
+        </div>
+    {% endmacro %}
+
+    {% for key, value in renderForKeyV %}
+        <p>{{key}} is {{value}}</p>
+        {{ field(key, value) }}
+    {% endfor %}
+    {% include "../components/alert.nj" %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{
+  "name": "showcase",
+  "description": "",
+  "main": "",
+  "authors": [
+    "diamondloler <857276958@qq.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
