@@ -7,6 +7,7 @@ module.exports = app => {
   const { router, controller, middleware } = app;
   const report = middleware.report()
   router.get('/', controller.home.index);
+  router.post('/GetUserList', report, controller.home.getUserList);
   router.get('/GetUserInfo', controller.home.getUserInfo);
   router.post('/UpdateUserInfo', controller.home.updateUserInfo);
   router.get('/Halloween', report, controller.home.test);
