@@ -59,6 +59,11 @@ module.exports = appInfo => {
       file: path.join(appInfo.root, 'logs', appInfo.name, 'egg-schedule.log'),
     },
   };
+  
+  //自动更新session时间
+  config.session = {
+    renew: true,
+  }
 
   return config;
 };

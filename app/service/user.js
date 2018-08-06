@@ -61,6 +61,14 @@ class UserService extends Service {
         }, ctx);
         return result;
     }
+    
+    async check(phone) {
+        var app = this.app
+        var user = await this.app.mysql.get('userinfo', {
+            phone
+        })
+        return user
+    }
 }
 
 module.exports = UserService

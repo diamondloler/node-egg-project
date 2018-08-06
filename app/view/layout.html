@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="../public/js/jquery.min.js"></script>
+    <script src="../public/js/lib/jquery.min.js"></script>
 </head>
+
 <body>
     <form method="POST" action="/upload" enctype="multipart/form-data">
-        title: <input name="title" /><br/>
-        file: <input  name="file[]" type="file"/><br/>
-        file: <input  name="file[]" type="file"/><br/>
-        file: <input  name="file[]" type="file"/><br/>
+        title:
+        <input name="title" />
+        <br/> file:
+        <input name="file[]" type="file" />
+        <br/> file:
+        <input name="file[]" type="file" />
+        <br/> file:
+        <input name="file[]" type="file" />
+        <br/>
         <button type="submit">上传</button>
     </form>
+    <div class="content">
+
+    </div>
     <script>
         var data = {
             title: '张达志',
@@ -30,6 +40,36 @@
         $.post('api/posts', JSON.stringify(data), function (res) {
             console.log(res)
         })
+
+        $.get('/Auth', function (res) {
+            var model, $content = $('.content')
+            console.log(res)
+            if (res && res.status && res.data.isLogin) {
+                var user = res.data.user
+                model =`
+                    <p>${user.user_name}</p>
+                    <p>${user.phone}</p>
+                    <p>${user.email}</p>
+                    <button class="btn-quit">登出</button>
+                `
+                $content.append(model)
+
+                var $quit = $('.btn-quit')
+
+                if ($quit.length) {
+                    $quit.click((e) => {
+                        $.get('/Quit', function (e) {
+                            alert('成功退出登陆')
+                            window.location.reload()
+                        })
+                    })
+                }
+
+            } else {
+                $content.append('<a href="/login">去登陆</a>')
+            }
+        })
     </script>
 </body>
+
 </html>

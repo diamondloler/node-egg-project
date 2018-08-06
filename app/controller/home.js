@@ -30,7 +30,6 @@ class HomeController extends Controller {
     var id = ctx.query.id || 0
     var result = await ctx.service.user.find(id)
     result.appKey = this.app.Key
-    console.log(this.ctx.request.fqo, '前端请求对象')
     ctx.body = ctx.helper.formatResult(result)
   }
 
@@ -84,6 +83,66 @@ class HomeController extends Controller {
     this.ctx.body = html
   }
 
+  // 渲染登录页
+  async renderLogin() {
+    if (this.ctx.session.user) {
+      this.ctx.redirect('/')
+      return
+    }
+    await this.ctx.render('home/login')
+  }
+
+  // 登陆，记录session
+  async userLogin() {
+    const ctx = this.ctx
+    var body =  ctx.request.body
+    var phone = body.phone
+    var email = body.email
+    var rule = {
+      email: 'string',
+      phone: 'string'
+    }
+    var status = 0
+    var msg = ''
+    ctx.validate(rule)
+    var result = await ctx.service.user.check(phone)
+    if (result) {
+      if (email === result.email) {
+        status = 1
+        msg = '登陆成功'
+        ctx.session.user = result
+      } else {
+        status = 0
+        msg = '密码不正确'
+      }
+    } else {
+      status = 0
+      msg = '用户不存在'
+    }
+    ctx.body = ctx.helper.formatResult(null, msg, status)
+  }
+
+
+  //授权
+  auth() {
+    var output = {}
+    var user = this.ctx.session.user
+    if (user) {
+      output.user = user
+      output.isLogin = true
+    } else  {
+      output.user = null
+      output.isLogin = false
+    }
+    this.ctx.body = this.ctx.helper.formatResult(output)
+  }
+
+  //登出
+  quit() {
+    this.ctx.session.user = null
+    this.ctx.body = this.ctx.helper.formatResult('操作成功')
+  }
+ 
 }
 
 module.exports = HomeController;
