@@ -96,7 +96,8 @@
         var phoneEle  = document.querySelector('#phone')
         var emailEle = document.querySelector('#email')
         var btnLogin = document.querySelector('.btn-login')
-        btnLogin.onclick = function (e) {
+    
+        if(btnLogin) btnLogin.onclick = function (e) {
             console.log(e)
             $.post('/UserLogin', {
                 email: emailEle.value,

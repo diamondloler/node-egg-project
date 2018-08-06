@@ -38,7 +38,7 @@ module.exports = appInfo => {
       // host
       host: '127.0.0.1',
       // 端口号
-      port: '3306',
+      port: '3307',
       // 用户名
       user: 'root',
       // 密码
@@ -65,5 +65,16 @@ module.exports = appInfo => {
     renew: true,
   }
 
+  //缓存服务器配置（未设密码）
+  config.redis = {
+    client: {
+      host: '127.0.0.1',
+      port: 6379, 
+      password: '',
+      db: '0',
+    },
+    agent: true
+  }
+
   return config;
-};
+}; 

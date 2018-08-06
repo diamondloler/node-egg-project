@@ -7,6 +7,8 @@ class HomeController extends Controller {
 
   //渲染主页
   async index() {
+    const app = this.app
+    app.redis.set('hello', 9527)
     var renderPower = {
       renderIf: {
         isTrue: false,
@@ -26,6 +28,7 @@ class HomeController extends Controller {
 
   //获取用户信息
   async getUserInfo() {
+    console.log(await this.app.redis.get('hello'), 'redis')
     var ctx = this.ctx
     var id = ctx.query.id || 0
     var result = await ctx.service.user.find(id)
