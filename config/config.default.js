@@ -38,7 +38,7 @@ module.exports = appInfo => {
       // host
       host: '127.0.0.1',
       // 端口号
-      port: '3306',
+      port: '3307',
       // 用户名
       user: 'root',
       // 密码
@@ -75,6 +75,12 @@ module.exports = appInfo => {
       db: '0',
     },
     agent: true
+  }
+
+  //鉴权配置
+  config.passportGithub = {
+    key: 'ea93f1720bdf4bf8c5aa',
+    secret: '1bdd0301e6a79740dec49a0d04a83b715f86ce37'
   }
 
   return config;

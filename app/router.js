@@ -8,6 +8,9 @@ module.exports = app => {
   const report = middleware.report()
   const checkAuth = middleware.checkAuth()
 
+  //挂载githurb Callback
+  app.passport.mount('github')
+
   router.get('/', controller.home.index);
 
   router.get('/login', controller.home.renderLogin);

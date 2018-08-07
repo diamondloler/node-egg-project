@@ -28,6 +28,7 @@
     <div style="margin-top: 100px;" class="wrap">
        
     </div>
+    <a href="/passport/github">Github</a>
     <script>
         var commerce = faker.commerce
         var phone = faker.phone
