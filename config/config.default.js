@@ -38,7 +38,7 @@ module.exports = appInfo => {
       // host
       host: '127.0.0.1',
       // 端口号
-      port: '3307',
+      port: '3306',
       // 用户名
       user: 'root',
       // 密码
@@ -52,8 +52,9 @@ module.exports = appInfo => {
     agent: false,
   };
 
-  // 定时任务日志写入
+  // 自定义日志
   config.customLogger = {
+    // 定时任务日志写入
     scheduleLogger: {
       consoleLevel: 'NONE',
       file: path.join(appInfo.root, 'logs', appInfo.name, 'egg-schedule.log'),
