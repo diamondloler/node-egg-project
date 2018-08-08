@@ -8,7 +8,14 @@ class HomeController extends Controller {
   //渲染主页
   async index() {
     const app = this.app
+    const ctx = this.ctx
+    
+    if (ctx.isAuthenticated() && ctx.user && (!ctx.user.phone || !ctx.user.email)) {
+      return await ctx.redirect('/complete_profile')
+    }
+
     app.redis.set('hello', 9527)
+
     var renderPower = {
       renderIf: {
         isTrue: false,
@@ -23,7 +30,13 @@ class HomeController extends Controller {
         d: 4
       }
     }
-    await this.ctx.render('home/home', renderPower)
+    await ctx.render('home/home', renderPower)
+  }
+
+  //渲染资料完善页
+  async renderCompleteProfile() {
+    const ctx = this.ctx
+    await ctx.render('home/complete_profile', ctx.user)
   }
 
   //获取用户信息
@@ -43,6 +56,9 @@ class HomeController extends Controller {
     var id = parseInt(data.id) || 0
     var msg = ''
     var type = parseInt(data.type) || 0
+
+    console.log(ctx.isAuthenticated(), '是否授权过')
+    console.log(ctx.user, '当前用户')
 
     delete data.id
 

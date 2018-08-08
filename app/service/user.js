@@ -69,6 +69,45 @@ class UserService extends Service {
         })
         return user
     }
-}
+
+    // row.uid row.name
+    async register(row) {
+        var ctx = this.ctx
+        var app = this.app
+
+        const result = await app.mysql.beginTransactionScope(async conn => {
+            var literals = conn.literals
+            await conn.insert('userinfo', {
+                user_name: row.name,
+                created_at: literals.now,
+                updated_at: literals.now
+            })
+
+            var LAST_INSERT_ID = await conn.query('SELECT LAST_INSERT_ID()')
+
+            //获取新建用户的userid
+            var userId = LAST_INSERT_ID[0]['LAST_INSERT_ID()']
+
+            //插入鉴权表
+            await conn.insert('passport_auth', {
+                user_id: userId,
+                provider: row.provider,
+                uid: row.uid,
+                created_at: literals.now,
+                updated_at: literals.now
+            })
+
+            //返回用户信息
+            return {
+                id: userId,
+                user_name: row.name
+            }
+        }, ctx);
+
+        return result;
+    }
+
+
+ }
 
 module.exports = UserService

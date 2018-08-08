@@ -31,3 +31,9 @@ exports.passportGithurb = {
     enable: true,
     package: 'egg-passport-github'
 }
+
+exports.io = {
+    enable: true,
+    package: 'egg-socket.io',
+};
+

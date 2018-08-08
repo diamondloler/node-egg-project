@@ -12,6 +12,7 @@ module.exports = app => {
   app.passport.mount('github')
 
   router.get('/', controller.home.index);
+  router.get('/complete_profile', controller.home.renderCompleteProfile);
 
   router.get('/login', controller.home.renderLogin);
   router.post('/UserLogin', controller.home.userLogin);
