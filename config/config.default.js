@@ -98,5 +98,15 @@ module.exports = appInfo => {
     }
   }
 
+  // 开启服务器代理
+  config.proxy = true
+
+  // 子群监听端口
+  config.cluster = {
+    listen: {
+      port: 7001
+    }
+  }
+
   return config;
 }; 

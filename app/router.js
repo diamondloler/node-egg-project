@@ -31,4 +31,6 @@ module.exports = app => {
   router.post('/upload', controller.upload.uploadImg);
 
   router.resources('posts', '/api/posts', controller.posts);
+
+  router.get('/.well-known/acme-challenge/:id', controller.home.cert)
 };

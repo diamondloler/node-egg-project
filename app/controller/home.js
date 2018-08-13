@@ -161,6 +161,11 @@ class HomeController extends Controller {
     this.ctx.session.user = null
     this.ctx.body = this.ctx.helper.formatResult('操作成功')
   }
+
+  //证书验证
+  cert() {
+    this.ctx.body = 'rpn-I-CrXbB2W3_IOVeFNl6yLetXo4MV26wy349rcX0.FtQXhmtJSbHbWkaWIiIJXx213cn-W-eDuW3pW0rLiFY'
+  }
  
 }
 
